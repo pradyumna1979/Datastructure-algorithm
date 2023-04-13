@@ -2,7 +2,7 @@ package GeekForGeeks.largestSumContigousSubArray;
 
 public class KadensAlgorithm {
     public static void largestSumSubArray(int[] arr, int n){
-        int max = 0;
+        int max = Integer.MIN_VALUE;
         int currentMax = 0;
         for (int i = 0; i < n; i++) {
             currentMax =currentMax + arr[i];
