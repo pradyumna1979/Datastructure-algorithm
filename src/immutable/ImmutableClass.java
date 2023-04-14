@@ -1,7 +1,7 @@
-import java.time.LocalDate;
+package immutable;
+
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -71,7 +71,7 @@ public class ImmutableClass {
 
     @Override
     public String toString() {
-        return "ImmutableClass{" +
+        return "immutable.ImmutableClass{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", testMap=" + testMap +
