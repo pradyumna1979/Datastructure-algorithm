@@ -3,35 +3,33 @@ package MultiThreading.volatole;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 public class Volatile {
-    public static void main(String[] args) throws InterruptedException {
-        Counter counter = new Counter();
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
-        executorService.submit(()-> Stream.iterate(1, p->p+1)
-                .limit(1000)
-                .mapToInt(p->p)
-                .forEach(p->counter.increment()));
-        executorService.submit(()->Stream.iterate(1,p->p+1)
-                    .limit(1000)
-                    .mapToInt(p->p)
-                    .forEach(p->counter.increment()));
-
-        boolean result = executorService.awaitTermination(1, TimeUnit.SECONDS);
-        System.out.println("result: "+result);
-        System.out.println(counter.getValue());
+    private volatile  int i;
+    public void increment(){
+        synchronized (this) {
+            ++i;
+        }
+    }
+    public int getValue(){
+        return i;
     }
 }
-
-class Counter{
-    private final AtomicInteger atomicCount = new AtomicInteger(0);
-    private int i =0;
-    public void increment(){
-        i = atomicCount.incrementAndGet();
-    }
-    public  int getValue(){
-        return i;
+class VolatileExample {
+    public static void main(String[] args) throws InterruptedException {
+        Volatile example = new Volatile();
+        ExecutorService service = Executors.newFixedThreadPool(2);
+        service.submit(()->{
+            for (int i = 0; i < 100; i++) {
+                example.increment();
+            }
+        });
+        service.submit(()->{
+            for (int i = 0; i < 100; i++) {
+                example.increment();
+            }
+        });
+        service.awaitTermination(1, TimeUnit.SECONDS);
+        System.out.println("i value ="+example.getValue());
     }
 }
