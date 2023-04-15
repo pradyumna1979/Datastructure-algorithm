@@ -31,5 +31,6 @@ class VolatileExample {
         });
         service.awaitTermination(1, TimeUnit.SECONDS);
         System.out.println("i value ="+example.getValue());
+        service.shutdown();
     }
 }

@@ -22,6 +22,7 @@ public class Atomic {
         boolean result = executorService.awaitTermination(1, TimeUnit.SECONDS);
         System.out.println("result: "+result);
         System.out.println(counter.getValue());
+        executorService.shutdown();
     }
 }
 
