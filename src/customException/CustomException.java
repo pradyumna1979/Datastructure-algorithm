@@ -8,7 +8,7 @@ class CustomException extends Exception{
     }
 }
 class CustomExceptionTest{
-    public static void main(String[] args) throws CustomException{
+    public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter i : ");
         int i = scanner.nextInt();

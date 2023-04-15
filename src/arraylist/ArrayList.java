@@ -6,7 +6,6 @@ public class ArrayList<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
     transient Object[] elementData;
-    protected transient int modCount = 0;
     private  int size = 0;
     public static final int SOFT_MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
     public static final int NEW_CAPACITY = 1000;
@@ -16,7 +15,6 @@ public class ArrayList<E> {
         this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
     }
     public boolean add(E e) {
-        modCount++;
         add(e, elementData, size);
         return true;
     }
